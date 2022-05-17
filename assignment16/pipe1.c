@@ -8,15 +8,15 @@
 int main(void)
 {
 	char buf[BUFFER_SIZE];
-	int pipe_fd[2];
-	if (pipe(pipe_fd) == -1) {
+	int pipe_fd[2]; // 파이프파일을 위한 배열
+
+	if (pipe(pipe_fd) == -1) { // 에러처리
 		fprintf(stderr, "pipe error\n");
 		exit(1);
 	}
-
-	printf("writing to file descriptor #%d\n", pipe_fd[1]);
+	printf("writing to file descriptor #%d\n", pipe_fd[1]); // write
 	write(pipe_fd[1], "OSLAB", 6);
-	printf("writing from file descriptor #%d\n", pipe_fd[0]);
+	printf("writing from file descriptor #%d\n", pipe_fd[0]); // read
 	read(pipe_fd[0], buf, 6);
 	printf("read\"%s\"\n", buf);
 	exit(0);
